@@ -22,12 +22,14 @@ gRPC は Google が開発しているRPCライブラリとFWで、通信層は H
 - centos7用のrpmを取得してインストールします。
 - protoファイルからコード生成をするコンパイラ(protoc)
 
-    wget http://mirror.centos.org/centos/7/os/x86_64/Packages/emacs-filesystem-24.3-22.el7.noarch.rpm
-    wget https://cbs.centos.org/kojifiles/packages/protobuf/3.6.1/4.el7/x86_64/protobuf-3.6.1-4.el7.x86_64.rpm
-    wget https://cbs.centos.org/kojifiles/packages/protobuf/3.6.1/4.el7/x86_64/protobuf-compiler-3.6.1-4.el7.x86_64.rpm
+```
+wget http://mirror.centos.org/centos/7/os/x86_64/Packages/emacs-filesystem-24.3-22.el7.noarch.rpm
+wget https://cbs.centos.org/kojifiles/packages/protobuf/3.6.1/4.el7/x86_64/protobuf-3.6.1-4.el7.x86_64.rpm
+wget https://cbs.centos.org/kojifiles/packages/protobuf/3.6.1/4.el7/x86_64/protobuf-compiler-3.6.1-4.el7.x86_64.rpm
 
-    rpm -ivh *.rpm
+sudo rpm -ivh *.rpm
 
+```
 
 ## Protocol Buffersのプラグインをインストール
 
@@ -105,13 +107,17 @@ go run client.go
 
 - 結果
 
+```
     result:&cat.MyCatResponse{Name:"mike", Kind:"Norwegian Forest Cat", XXX_NoUnkeyedLiteral:struct {}{}, XXX_unrecognized:[]uint8(nil), XXX_sizecache:0} 
     error::<nil> 
+```
 
 以上で、ローカル環境でgRPCの動作確認が完了
 
 
 ## 参考
+
+以下を参考させていただきました。
 
 https://qiita.com/marnie_ms4/items/4582a1a0db363fe246f3
 https://github.com/golang/protobuf
