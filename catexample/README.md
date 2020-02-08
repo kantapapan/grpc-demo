@@ -1,6 +1,9 @@
 # grpc-demo
 
-golang でgrpc server/client の通信を行うデモ
+gRPC は Google が開発しているRPCライブラリとFWで、通信層は HTTP/2 を介して行われます。
+
+試しにGolangによるgRPCサーバー&クライアントを同一環境に立ててgRPC通信を行ってみる。
+
 
 # OS
 
@@ -16,7 +19,7 @@ golang でgrpc server/client の通信を行うデモ
 
 ##  protocol buffer コンパイラ
 
-- protocol buffer rpmを取得してインストールします。
+- centos7用のrpmを取得してインストールします。
 - protoファイルからコード生成をするコンパイラ(protoc)
 
 ```
@@ -42,8 +45,17 @@ sudo rpm -ivh *.rpm
 ## demoソースの構成
 
     grpc-demo/
-    ├── catexample // 単純なデータのやり取り
-    ├── curexample // サーバー側でCsv読み込んでクライアントでデータを取得
+    ├── README.md
+    ├── client.go
+    ├── go.mod
+    ├── go.sum
+    ├── main.go
+    ├── pb
+    │   └── cat.pb.go
+    ├── proto
+    │   └── cat.proto
+    └── service
+        └── cat.go
 
 
 ## サーバの実装
