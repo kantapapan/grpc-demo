@@ -9,43 +9,43 @@ import (
 	"strconv"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/kantapapan/grpc-demo/curexample/curproto"
+	spbuf "github.com/kantapapan/grpc-demo/sphere/protobuf"
 )
 
-var curList *curproto.CurrencyList
+var spList *spbuf.SphereList
 
-func currencies(resp http.ResponseWriter, req *http.Request) {
+func spheries(resp http.ResponseWriter, req *http.Request) {
 
-	pbData, err := proto.Marshal(curList)
+	spData, err := proto.Marshal(spList)
 	if err != nil {
 		resp.WriteHeader(http.StatusBadRequest)
 		return
 	}
 	resp.WriteHeader(http.StatusOK)
 	resp.Header().Set("Content-Type", "application/octet-stream")
-	resp.Write(pbData)
+	resp.Write(spData)
 }
 
 func main() {
-	// load currencies protobuf from csv
-	list, err := createPbFromCsv("./curdata.csv")
+	// load protobuf from csv
+	list, err := createPbFromCsv("./sphere.csv")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	curList = list
+	spList = list
 
 	// start server
-	http.HandleFunc("/", currencies)
-	fmt.Println("Starting server on port 4040")
-	if err := http.ListenAndServe(":4040", nil); err != nil {
+	http.HandleFunc("/", spheries)
+	fmt.Println("Starting server on port 4041")
+	if err := http.ListenAndServe(":4041", nil); err != nil {
 		fmt.Println(err)
 	}
 }
 
 // createPbFromCsv loads the currency data from csv into protobuf values
-func createPbFromCsv(path string) (*curproto.CurrencyList, error) {
-	items := make([]*curproto.Currency, 0)
+func createPbFromCsv(path string) (*spbuf.SphereList, error) {
+	items := make([]*spbuf.Sphere, 0)
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
@@ -68,13 +68,13 @@ func createPbFromCsv(path string) (*curproto.CurrencyList, error) {
 			num = int32(i)
 		}
 		// create data row with protobuf
-		c := &curproto.Currency{
-			Country: row[0],
-			Name:    row[1],
-			Code:    row[2],
-			Number:  num,
+		c := &spbuf.Sphere{
+			Job:     row[0],
+			License: row[1],
+			Skill:   row[2],
+			Time:    num,
 		}
 		items = append(items, c)
 	}
-	return &curproto.CurrencyList{Items: items}, err
+	return &spbuf.SphereList{Items: items}, err
 }

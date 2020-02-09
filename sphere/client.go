@@ -7,11 +7,11 @@ import (
 	"net/http"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/kantapapan/grpc-demo/curexample/curproto"
+	spbuf "github.com/kantapapan/grpc-demo/sphere/protobuf"
 )
 
 func main() {
-	resp, err := http.Get("http://localhost:4040/")
+	resp, err := http.Get("http://localhost:4041/")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -25,17 +25,13 @@ func main() {
 	}
 
 	// unmarshal
-	curList := new(curproto.CurrencyList)
-	if err := proto.Unmarshal(data, curList); err != nil {
+	spList := new(spbuf.SphereList)
+	if err := proto.Unmarshal(data, spList); err != nil {
 		log.Fatalln(err)
 	}
 
 	// display protobuf data
-	for i, item := range curList.Items {
-		fmt.Printf("%-25s%-20s\n", item.Name, item.Code)
-		if i > 30 {
-			fmt.Println("...")
-			break
-		}
+	for _, item := range spList.Items {
+		fmt.Printf("%+v\n", item)
 	}
 }

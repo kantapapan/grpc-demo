@@ -1,0 +1,15 @@
+syntax = "proto3";
+package proto;
+
+// Sphere represents sphere information
+message Sphere {
+    string job = 1; 
+    string license = 2;
+    string skill = 3;
+    int32 time = 4;
+}
+
+// SphereList a collection of speries
+message SphereList {
+    repeated Sphere items = 1;
+}
