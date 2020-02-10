@@ -24,15 +24,11 @@ func (s *SphereService) GetSphereByJob(
 	message *pb.SphereJobMessage) (*pb.SphereList, error) {
 	spList, err := createPbFromCsv("./sphere.csv")
 
+	filterByJob("/", spList)
+
 	if err != nil {
 		fmt.Printf("%+v", err)
 	}
-
-	/*
-		fmt.Println("----")
-		fmt.Printf("%+v", spList)
-		fmt.Println("----")
-	*/
 
 	switch message.TargetJob {
 	case "Architect":
@@ -42,6 +38,14 @@ func (s *SphereService) GetSphereByJob(
 	}
 
 	return nil, errors.New("Not Found YourSpere")
+}
+
+//  filterByJob ...
+func filterByJob(job string, l *pb.SphereList) (*pb.SphereList, error) {
+	for _, item := range l.Items {
+		fmt.Printf("%+v\n", item)
+	}
+	return spList, nil
 }
 
 // createPbFromCsv loads the currency data from csv into protobuf values
@@ -70,6 +74,9 @@ func createPbFromCsv(path string) (*pb.SphereList, error) {
 			id = int32(i)
 		}
 
+		var job string
+		job = row[1]
+
 		var num int32
 		if i, err := strconv.Atoi(row[3]); err == nil {
 			num = int32(i)
@@ -77,7 +84,7 @@ func createPbFromCsv(path string) (*pb.SphereList, error) {
 		// create data row with protobuf
 		c := &pb.Sphere{
 			Id:      id,
-			Job:     row[1],
+			Job:     job,
 			License: row[2],
 			Skill:   row[3],
 			Time:    num,
