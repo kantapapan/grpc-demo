@@ -2,6 +2,12 @@
 2,Architect,OOP,Capsule,10
 3,Architect,DDD,ContextMap,12
 4,Architect,DDD,ValueObject,7
-5,Architect,DDD,HexArchitectrue,5
-6,Architect,DDD,Entity,20
+5,Architect,DDD,Repository,7
+6,Architect,DDD,Entity,7
+7,Architect,DDD,CQRS,7
+8,Architect,DDD,Specification,7
+9,Architect,DDD,Module,7
+10,CloudEngineer,Docker,Docker,5
+11,CloudEngineer,DDD,K8s,20
+12,CloudEngineer,DDD,AWS,20
 

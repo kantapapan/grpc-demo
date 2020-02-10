@@ -19,19 +19,29 @@ type SphereService struct {
 var spList *pb.SphereList
 
 // GetSphereByJob ...
-func (s *SphereService) GetSphereByJob(ctx context.Context, message *pb.SphereJobMessage) (*pb.SphereList, error) {
-
+func (s *SphereService) GetSphereByJob(
+	ctx context.Context,
+	message *pb.SphereJobMessage) (*pb.SphereList, error) {
 	spList, err := createPbFromCsv("./sphere.csv")
 
 	if err != nil {
 		fmt.Printf("%+v", err)
 	}
 
+	/*
+		fmt.Println("----")
+		fmt.Printf("%+v", spList)
+		fmt.Println("----")
+	*/
+
 	switch message.TargetJob {
 	case "Architect":
 		return spList, nil
+	case "CloudEngineer":
+		return spList, nil
 	}
-	return nil, errors.New("Not Found YourCat")
+
+	return nil, errors.New("Not Found YourSpere")
 }
 
 // createPbFromCsv loads the currency data from csv into protobuf values
