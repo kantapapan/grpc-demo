@@ -1,0 +1,24 @@
+syntax = "proto3";
+package proto;
+
+service SphereService {
+  rpc GetSphereByJob (SphereJobMessage) returns (SphereList) {}
+}
+
+// Sphere ...
+message Sphere {
+    int32 id = 1;
+    string job = 2; 
+    string license = 3;
+    string skill = 4;
+    int32 time = 5;
+}
+
+// SphereList a collection of speries
+message SphereList {
+    repeated Sphere items = 1;
+}
+
+message SphereJobMessage {
+  string target_job = 1;
+}
